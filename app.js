@@ -84,7 +84,7 @@ async function main(){
 
     // get prices for every ingredients in every recipe
     recipesWIngredients[0].forEach(async element => {
-      const getIngredient = await connection.execute('SELECT i.name, i.price, i.qty FROM ingredients as i WHERE i.id = ?', [element.id_ingredient])
+      const getIngredient = await connection.execute('SELECT i.name, i.price, i.qty FROM ingredients WHERE ingredients.id = ?', [element.id_ingredient])
       const getRecipeName = await connection.execute('SELECT recipes.name FROM recipes WHERE recipes.id = ?', [element.id_recipe])
       
       element.recipe_name = getRecipeName[0][0].name
@@ -154,7 +154,7 @@ async function main(){
   //EDIT EXISTING RECIPE  
   //               ~~~[ UPDATE RECIPE NAME ]~~~
   app.put('/api/editRacipeName/:id', async (req, res) => {
-    const result = await connection.execute('UPDATE recipes as r SET r.name=? WHERE r.id=?', 
+    const result = await connection.execute('UPDATE recipes SET r.name=? WHERE recipes.id=?', 
     [req.body.name, req.params.id])
     res.send({
       newName: req.body.name,
@@ -164,7 +164,7 @@ async function main(){
 
   //               ~~~[ UPDATE INGREDIENT QUANTITY ]~~~
   app.put('/api/editIngredientQty/:id_recipe/:id_ingredient/:qty', async (req, res) => {
-    const result = await connection.execute('UPDATE recipes_ingredients as ri SET ri.qty=? WHERE ri.id_recipe=? AND ri.id_ingredient=?', 
+    const result = await connection.execute('UPDATE recipes_ingredients  SET recipes_ingredients.qty=? WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', 
     [req.params.qty, req.params.id_recipe, req.params.id_ingredient])
     res.send({
       editedIngredient:{
@@ -189,7 +189,7 @@ async function main(){
 
   //               ~~~[ DELETE INGREDIENT ]~~~
   app.delete('/api/deleteIngredient/:id_recipe/:id_ingredient', async (req, res)=>{
-    const result = await connection.execute('DELETE FROM recipes_ingredients as ri WHERE ri.id_recipe=? AND ri.id_ingredient=?', [req.params.id_recipe, req.params.id_ingredient])
+    const result = await connection.execute('DELETE FROM recipes_ingredients  WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', [req.params.id_recipe, req.params.id_ingredient])
     res.send({
       deletedIngredient:{
         id: req.params.id_ingredient,
