@@ -154,7 +154,7 @@ async function main(){
   //EDIT EXISTING RECIPE  
   //               ~~~[ UPDATE RECIPE NAME ]~~~
   app.put('/api/editRacipeName/:id', async (req, res) => {
-    const result = await connection.execute('UPDATE recipes SET r.name=? WHERE recipes.id=?', 
+    const result = await connection.execute('UPDATE recipes SET recipes.name=? WHERE recipes.id=?', 
     [req.body.name, req.params.id])
     res.send({
       newName: req.body.name,
