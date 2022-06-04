@@ -66,7 +66,7 @@ async function main(){
   // DELETE EXISTING INGREDIENT
   app.delete('/api/ingredients/:id', async (req, res)=>{
 
-    const result = await connection.execute('DELETE FROM ingredients AS i WHERE i.id = ?', [req.params.id])
+    const result = await connection.execute('DELETE FROM ingredients WHERE ingredients.id = ?', [req.params.id])
     res.send(result[0])
   })
 
