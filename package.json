@@ -2,14 +2,13 @@
   "name": "napi_2",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
     "start": "node ."
   },
   "author": "emmanuele",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.7.2",
     "express": "^4.18.1",
     "mysql2": "^2.3.3"
   }
