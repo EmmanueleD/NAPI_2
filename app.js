@@ -13,10 +13,7 @@ async function main(){
     console.log("server up")
   })
 
-
-
   const mysql = require('mysql2/promise')
-
 
 //mysql://:@/?reconnect=true
   const connection =  await mysql.createConnection({
