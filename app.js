@@ -77,7 +77,7 @@ async function main(){
   })
 
   // GET ALL RECIPES WITH INGREDIENTS
-  app.get('/api/recipes/', async(req, res)=> {
+  app.get('/api/recipeswingredients/', async(req, res)=> {
    let arr = []
    //get all ingredients for every recipe 
    const recipesWIngredients = await connection.execute('SELECT * FROM recipes_ingredients')
