@@ -15,20 +15,12 @@ async function main(){
 
   const mysql = require('mysql2/promise')
 
-//mysql://:@/?reconnect=true
   const connection =  await mysql.createConnection({
     host: 'us-cdbr-east-05.cleardb.net',
-    user: 'bb320117d6f6fe',
-    password: 'ddfadcfb',
-    database: 'heroku_d909bf62d8c6a38',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
   })
-
-  // const connection =  await mysql.createConnection({
-  //   host: 'us-cdbr-east-05.cleardb.net',
-  //   user: process.env.DB_USER,
-  //   password: process.env.DB_PASS,
-  //   database: process.env.DB_NAME,
-  // })
 
   // GET ALL INGREDIENTS
   app.get('/api/ingredients/', async (req, res)=>{
