@@ -84,7 +84,7 @@ async function main(){
 
     // get prices for every ingredients in every recipe
     recipesWIngredients[0].forEach(async element => {
-      const getIngredient = await connection.execute('SELECT i.name, i.price, i.qty FROM ingredients WHERE ingredients.id = ?', [element.id_ingredient])
+      const getIngredient = await connection.execute('SELECT ingredients.name, ingredients.price, ingredients.qty FROM ingredients WHERE ingredients.id = ?', [element.id_ingredient])
       const getRecipeName = await connection.execute('SELECT recipes.name FROM recipes WHERE recipes.id = ?', [element.id_recipe])
       
       element.recipe_name = getRecipeName[0][0].name
