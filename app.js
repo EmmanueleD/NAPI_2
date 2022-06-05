@@ -89,7 +89,7 @@ async function main(){
       
       element.recipe_name = getRecipeName[0][0].name
       element.ingredient = getIngredient[0][0]
-      element.price = getIngredient[0][0].price/getIngredient[0][0].qty*element.qty
+      // element.price = getIngredient[0][0].price/getIngredient[0][0].qty*element.qty
       arr.push(element)
      
       let groupBy = (array, key) => {
