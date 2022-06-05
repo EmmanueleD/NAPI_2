@@ -102,6 +102,7 @@ async function main(){
       // arr.length == recipesWIngredients[0].length ? res.send(arr) : null
       if(arr.length == recipesWIngredients[0].length) {
        let a =  groupBy(arr, ["id_recipe"])
+       a.price = a.ingredient.price/a.ingredient.qty*a.qty
        res.send(a)
       }  
     })   
