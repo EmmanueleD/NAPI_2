@@ -99,11 +99,11 @@ async function main(){
         }, {});
      };
 
-      // arr.length == recipesWIngredients[0].length ? res.send(arr) : null
-      if(arr.length == recipesWIngredients[0].length) {
-       let a =  groupBy(arr, ["id_recipe"])
-       res.send(a)
-      }  
+      arr.length == recipesWIngredients[0].length ? res.send(arr) : null
+      // if(arr.length == recipesWIngredients[0].length) {
+      //  let a =  groupBy(arr, ["id_recipe"])
+      //  res.send(a)
+      // }  
     })   
   })
 
