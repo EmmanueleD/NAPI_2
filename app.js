@@ -71,13 +71,13 @@ async function main(){
   })
 
   // GET ALL RECIPES
-  app.get('/api/recipeswoingredients/', async (req, res)=>{
+  app.get('/api/recipes_simple/', async (req, res)=>{
     const result = await connection.execute('SELECT * FROM recipes')
     res.send(result[0])
   })
 
   // GET ALL RECIPES WITH INGREDIENTS
-  app.get('/api/recipeswingredients/', async(req, res)=> {
+  app.get('/api/recipes_complete/', async(req, res)=> {
    let arr = []
    //get all ingredients for every recipe 
    const recipesWIngredients = await connection.execute('SELECT * FROM recipes_ingredients')
@@ -108,7 +108,7 @@ async function main(){
   })
 
   // GET RECIPE BY ID
-  app.get('/api/recipes/:id', async (req, res)=>{
+  app.get('/api/recipes_/:id', async (req, res)=>{
 
     const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
 
@@ -128,7 +128,7 @@ async function main(){
   })
 
   //POST NEW RECIPE
-  app.post('/api/recipes/', async (req, res)=>{
+  app.post('/api/recipes_/', async (req, res)=>{
     let ingredientsQuery = "INSERT INTO recipes_ingredients (id_recipe, id_ingredient, qty) VALUES"
     let data = {
       name: req.body.name,
@@ -153,7 +153,7 @@ async function main(){
 
   //EDIT EXISTING RECIPE  
   //               ~~~[ UPDATE RECIPE NAME ]~~~
-  app.put('/api/editRacipeName/:id', async (req, res) => {
+  app.put('/api/recipes_editname/:id', async (req, res) => {
     const result = await connection.execute('UPDATE recipes SET recipes.name=? WHERE recipes.id=?', 
     [req.body.name, req.params.id])
     res.send({
@@ -163,7 +163,7 @@ async function main(){
   })
 
   //               ~~~[ UPDATE INGREDIENT QUANTITY ]~~~
-  app.put('/api/editIngredientQty/:id_recipe/:id_ingredient/:qty', async (req, res) => {
+  app.put('/api/recipes_editingredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
     const result = await connection.execute('UPDATE recipes_ingredients  SET recipes_ingredients.qty=? WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', 
     [req.params.qty, req.params.id_recipe, req.params.id_ingredient])
     res.send({
@@ -176,7 +176,7 @@ async function main(){
   })
 
   //               ~~~[ INSERT NEW INGREDIENT ]~~~
-  app.post('/api/insertNewIngredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
+  app.post('/api/recipes_addingredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
     const result = await connection.execute('INSERT INTO recipes_ingredients (id_recipe, id_ingredient, qty) VALUES (?, ?, ?)', 
     [req.params.id_recipe, req.params.id_ingredient, req.params.qty])
     res.send({
@@ -188,7 +188,7 @@ async function main(){
   })
 
   //               ~~~[ DELETE INGREDIENT ]~~~
-  app.delete('/api/deleteIngredient/:id_recipe/:id_ingredient', async (req, res)=>{
+  app.delete('/api/recipes_deleteingredient/:id_recipe/:id_ingredient', async (req, res)=>{
     const result = await connection.execute('DELETE FROM recipes_ingredients  WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', [req.params.id_recipe, req.params.id_ingredient])
     res.send({
       deletedIngredient:{
@@ -199,7 +199,7 @@ async function main(){
   })
 
   // DELETE EXISTING RECIPE
-  app.delete('/api/recipes/:id', async (req, res)=> {
+  app.delete('/api/recipes_/:id', async (req, res)=> {
     const deleteRecipe = await connection.execute('DELETE FROM recipes WHERE id=?', [req.params.id])
     const deleteIngredients = await connection.execute('DELETE FROM recipes_ingredients WHERE id_recipe=?', [req.params.id])
     res.send({
