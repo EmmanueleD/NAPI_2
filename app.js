@@ -104,7 +104,8 @@ async function main(){
       //  let a =  groupBy(arr, ["id_recipe"])
       //  res.send(a)
       // }  
-    })   
+    })  
+    res.send(arr) 
   })
 
   // GET RECIPE BY ID
