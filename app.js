@@ -79,7 +79,7 @@ async function main(){
   // GET ALL RECIPES WITH INGREDIENTS
   app.get('/api/recipes_complete/', async(req, res)=> {
 
-      const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient ;')
+      const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, i.price / i.qty * ri.qty AS price_ingredient,ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient ;')
 
       res.send(result[0])
 //    let arr = []
