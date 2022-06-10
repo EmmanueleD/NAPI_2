@@ -66,7 +66,7 @@ async function main(){
   })
 
   // DELETE EXISTING INGREDIENT
-  app.delete('/api/ingredients/:id', async (req, res)=>{
+  app.delete('/api/ingredients/:id',cors(),  async (req, res)=>{
 
     const result = await connection.execute('DELETE FROM ingredients WHERE ingredients.id = ?', [req.params.id])
     res.send(result[0])
@@ -194,7 +194,7 @@ async function main(){
   })
 
   //               ~~~[ DELETE INGREDIENT ]~~~
-  app.delete('/api/recipes_deleteingredient/:id_recipe/:id_ingredient', async (req, res)=>{
+  app.delete('/api/recipes_deleteingredient/:id_recipe/:id_ingredient', cors(), async (req, res)=>{
     const result = await connection.execute('DELETE FROM recipes_ingredients  WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', [req.params.id_recipe, req.params.id_ingredient])
     res.send({
       deletedIngredient:{
@@ -205,7 +205,7 @@ async function main(){
   })
 
   // DELETE EXISTING RECIPE
-  app.delete('/api/recipes_/:id', async (req, res)=> {
+  app.delete('/api/recipes_/:id', cors(), async (req, res)=> {
     const deleteRecipe = await connection.execute('DELETE FROM recipes WHERE id=?', [req.params.id])
     const deleteIngredients = await connection.execute('DELETE FROM recipes_ingredients WHERE id_recipe=?', [req.params.id])
     res.send({
