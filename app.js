@@ -78,34 +78,37 @@ async function main(){
 
   // GET ALL RECIPES WITH INGREDIENTS
   app.get('/api/recipes_complete/', async(req, res)=> {
-   let arr = []
-   //get all ingredients for every recipe 
-   const recipesWIngredients = await connection.execute('SELECT * FROM recipes_ingredients')
 
-    // get prices for every ingredients in every recipe
-    recipesWIngredients[0].forEach(async element => {
-      const getIngredient = await connection.execute('SELECT ingredients.name, ingredients.price, ingredients.qty FROM ingredients WHERE ingredients.id = ?', [element.id_ingredient])
-      const getRecipeName = await connection.execute('SELECT recipes.name FROM recipes WHERE recipes.id = ?', [element.id_recipe])
+      const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient ;')
+
+      res.send(result[0])
+//    let arr = []
+//    //get all ingredients for every recipe 
+//    const recipesWIngredients = await connection.execute('SELECT * FROM recipes_ingredients')
+
+//     // get prices for every ingredients in every recipe
+//     recipesWIngredients[0].forEach(async element => {
+//       const getIngredient = await connection.execute('SELECT ingredients.name, ingredients.price, ingredients.qty FROM ingredients WHERE ingredients.id = ?', [element.id_ingredient])
+//       const getRecipeName = await connection.execute('SELECT recipes.name FROM recipes WHERE recipes.id = ?', [element.id_recipe])
       
-      element.recipe_name = getRecipeName[0][0].name
-      element.ingredient = getIngredient[0][0]
-      // element.price = getIngredient[0][0].price/getIngredient[0][0].qty*element.qty
-      arr.push(element)
+//       element.recipe_name = getRecipeName[0][0].name
+//       element.ingredient = getIngredient[0][0]
+//       // element.price = getIngredient[0][0].price/getIngredient[0][0].qty*element.qty
+//       arr.push(element)
      
-      let groupBy = (array, key) => {
-        return array.reduce((result, obj) => {
-           (result[obj[key]] = result[obj[key]] || []).push(obj);
-           return result;
-        }, {});
-     };
+//       let groupBy = (array, key) => {
+//         return array.reduce((result, obj) => {
+//            (result[obj[key]] = result[obj[key]] || []).push(obj);
+//            return result;
+//         }, {});
+//      };
 
-      // // arr.length == recipesWIngredients[0].length ? res.send(arr) : null
-      // if(arr.length == recipesWIngredients[0].length) {
-      //  let a =  groupBy(arr, ["id_recipe"])
-      //  res.send(a)
-      // }  
-    })  
-    res.send(arr) 
+//       // arr.length == recipesWIngredients[0].length ? res.send(arr) : null
+//       if(arr.length == recipesWIngredients[0].length) {
+//        let a =  groupBy(arr, ["id_recipe"])
+//        res.send(a)
+//       }  
+//     })   
   })
 
   // GET RECIPE BY ID
