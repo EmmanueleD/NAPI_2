@@ -20,7 +20,7 @@ async function main(){
   const mysql = require('mysql2/promise')
 
   const connection =  await mysql.createPool({
-      host: 'containers-us-west-65.railway.app',
+      host: '2b8ogdc7ohls.aws-sa-east-1-1.psdb.cloud',
       port:5818,
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
