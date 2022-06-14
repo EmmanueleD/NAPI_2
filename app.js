@@ -3,12 +3,6 @@ async function main(){
   const cors = require('cors')
   const app = express()
   
-  require('dotenv').config();
-//   const mysql = require('mysql2');
-//   const connection = mysql.createConnection(process.env.DATABASE_URL);
-  console.log('Connected to PlanetScale!');
-//   connection.end();
-  
   app.use(express.json())
   app.use(cors())
 
@@ -26,7 +20,7 @@ async function main(){
   const mysql = require('mysql2/promise')
 
   const connection =  await mysql.createPool({
-      host: '2b8ogdc7ohls.aws-sa-east-1-1.psdb.cloud',
+      host: 'containers-us-west-65.railway.app',
       port:5818,
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
