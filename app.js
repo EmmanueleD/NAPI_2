@@ -75,6 +75,14 @@ async function main(){
     res.send(result[0])
   })
 
+  app.get('/api/selectBiggerId/', async(req, res)=>{
+
+
+      const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
+      res.send(result)
+
+  })
+
   // GET ALL RECIPES
   app.get('/api/recipes_simple/', async (req, res)=>{
     const result = await connection.execute('SELECT * FROM recipes')
