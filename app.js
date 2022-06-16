@@ -94,7 +94,7 @@ async function main(){
 
       // const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, i.price / i.qty * ri.qty AS price_ingredient,ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient ;')
 
-      const result = await connection.execute('SELECT recipes.id AS recipe_id, recipes.name AS recipe_name, ingredients.id AS ingredient_id, ingredients.name AS ingredient_name, ingredients.price AS ingredient_price, ingredients.qty AS ingredient_qty, recipes_ingredients.qty AS ingrInRecipe.qty FROM recipes JOIN recipes_ingredients ON recipes_ingredients.id_recipe = recipes.id JOIN ingredients ON ingredients.id = recipes_ingredients.id_ingredient;')
+      const result = await connection.execute('SELECT recipes.id AS recipe_id, recipes.name AS recipe_name, ingredients.id AS ingredient_id, ingredients.name AS ingredient_name, ingredients.price AS ingredient_price, ingredients.qty AS ingredient_qty, recipes_ingredients.qty AS ingrInRecipe_qty FROM recipes JOIN recipes_ingredients ON recipes_ingredients.id_recipe = recipes.id JOIN ingredients ON ingredients.id = recipes_ingredients.id_ingredient;')
 
       res.send(result[0])
 //    let arr = []
