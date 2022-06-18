@@ -158,21 +158,25 @@ async function main(){
     })
     // create new recipe
     const newRecipe = await connection.execute('INSERT INTO recipes (name) VALUES (?)', [data.name])
+    console.log("🚀 ~ file: app.js ~ line 161 ~ app.post ~ newRecipe", newRecipe)
 
-    console.log("FROM NAPI_2 NEW RECIPE: ", newRecipe)
+
     //get id of recipe just created
 //     const lastId = await connection.execute('SELECT LAST_INSERT_ID()')
     const lastId = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
-    console.log("FROM NAPI_2 LAST_ID ", lastId)
+    console.log("🚀 ~ file: app.js ~ line 167 ~ app.post ~ lastId", lastId)
+
     data.id = await lastId[0][0]["LAST_INSERT_ID()"]
     //set query to put all ingredients in recipe just created
     data.ingredients.forEach(element => {
+    console.log("🚀 ~ file: app.js ~ line 172 ~ app.post ~ element", element)
+      
       let nextIngredient = " (" + data.id +", "+element.id+", "+element.qty+" ),"
       ingredientsQuery += nextIngredient
     })
     const putIngredients = await connection.execute(ingredientsQuery.slice(0, -1)) 
-    console.log("FROM NAPI_2 PUT INGREDIENTS: ", putIngredients)
-    console.log("FROM NAPI_2 DATA ", data)
+    console.log("🚀 ~ file: app.js ~ line 178 ~ app.post ~ putIngredients", putIngredients)
+
     res.send(data)
   })
 
