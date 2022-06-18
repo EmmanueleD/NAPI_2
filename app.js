@@ -14,23 +14,17 @@ async function main(){
 
   let port = process.env.PORT || 3590
   app.listen(port, ()=>{
-    console.log("NAPI_2 server up")
+    console.log("NAPI_2 server up   :)")
   })
 
   const mysql = require('mysql2/promise')
 
-
-
-  //mysql://root:ScDxO0JIzTXkEaBHAzFA@containers-us-west-65.railway.app:5818/railway
   const connection =  await mysql.createPool({
       host: 'containers-us-west-65.railway.app',
       port:5818,
-      user: 'root',
-      password: 'ScDxO0JIzTXkEaBHAzFA',
-      database:'railway',
-      // user: process.env.DB_USER,
-      // password: process.env.DB_PASS,
-      // database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
     })
 
 
