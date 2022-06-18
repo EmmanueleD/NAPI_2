@@ -39,9 +39,9 @@ async function main(){
   
   // GET INGREDIENT BY ID
   app.get('/api/ingredients/:id', async (req, res)=>{
-//     const result = await connection.execute('SELECT i.id, i.name, i.price, i.qty FROM ingredients as i WHERE i.id = ?', [req.params.id])
-//     console.log("🚀 ~ file: app.js ~ line 43 ~ app.get ~ result", result[0])
-//     res.send(result[0])
+    const result = await connection.execute('SELECT i.id, i.name, i.price, i.qty FROM ingredients as i WHERE i.id = ?', [req.params.id])
+    console.log("🚀 ~ file: app.js ~ line 43 ~ app.get ~ result", result[0])
+    res.send(result[0])
   })
 
   // POST NEW INGREDIENT
