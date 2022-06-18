@@ -33,7 +33,7 @@ async function main(){
   app.get('/api/ingredients/', async (req, res)=>{
     const result = await connection.execute('SELECT * FROM ingredients')
     console.log(result[0])
-    res.send(result)
+    res.send(result[0][0])
   })
 
   
