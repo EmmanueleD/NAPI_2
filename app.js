@@ -32,6 +32,7 @@ async function main(){
   // GET ALL INGREDIENTS
   app.get('/api/ingredients/', async (req, res)=>{
     const result = await connection.execute('SELECT * FROM ingredients')
+    console.log("🚀 ~ file: app.js ~ line 35 ~ app.get ~ result", result[0])
     res.send(result[0])
   })
 
@@ -39,7 +40,7 @@ async function main(){
   // GET INGREDIENT BY ID
   app.get('/api/ingredients/:id', async (req, res)=>{
 //     const result = await connection.execute('SELECT i.id, i.name, i.price, i.qty FROM ingredients as i WHERE i.id = ?', [req.params.id])
-//     console.log(result[0])
+//     console.log("🚀 ~ file: app.js ~ line 43 ~ app.get ~ result", result[0])
 //     res.send(result[0])
   })
 
@@ -51,7 +52,7 @@ async function main(){
 //       qty: req.body.qty
 //     }
 //     const result = await connection.execute('INSERT INTO ingredients (name, price, qty) VALUES (?, ?, ?)', [data.name, data.price, data.qty])
-//     console.log(data, result[0])
+//     console.log("🚀 ~ file: app.js ~ line 55 ~ app.post ~ data", data)
 //     res.send(data)
   })
 
@@ -63,27 +64,27 @@ async function main(){
 //       qty: req.body.qty
 //     }
 //     const result = await connection.execute('UPDATE ingredients SET name = ?, price = ? , qty = ? WHERE ingredients.id = ? ', [data.name, data.price, data.qty, req.params.id])
+//     console.log("🚀 ~ file: app.js ~ line 67 ~ app.put ~ result", result[0])
 //     res.send(result[0])
   })
 
   // DELETE EXISTING INGREDIENT
   app.delete('/api/ingredients/:id',cors(),  async (req, res)=>{
-
 //     const result = await connection.execute('DELETE FROM ingredients WHERE ingredients.id = ?', [req.params.id])
+//     console.log("🚀 ~ file: app.js ~ line 75 ~ app.delete ~ result", result[0])
 //     res.send(result[0])
   })
 
   app.get('/api/selectBiggerId/', async(req, res)=>{
-
-
       // const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
+      // console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result", result[0])
       // res.send(result)
-
   })
 
   // GET ALL RECIPES
   app.get('/api/recipes_simple/', async (req, res)=>{
 //     const result = await connection.execute('SELECT * FROM recipes')
+//     console.log("🚀 ~ file: app.js ~ line 88 ~ app.get ~ result", result[0])
 //     res.send(result[0])
   })
 
@@ -95,6 +96,7 @@ async function main(){
 
       ////////////////////////////////////////////
       // const result = await connection.execute('SELECT recipes.id AS recipe_id, recipes.name AS recipe_name, ingredients.id AS ingredient_id, ingredients.name AS ingredient_name, ingredients.price AS ingredient_price, ingredients.qty AS ingredient_qty, recipes_ingredients.qty AS ingrInRecipe_qty FROM recipes JOIN recipes_ingredients ON recipes_ingredients.id_recipe = recipes.id JOIN ingredients ON ingredients.id = recipes_ingredients.id_ingredient;')
+      // console.log("🚀 ~ file: app.js ~ line 100 ~ app.get ~ result", result[0])
 
       // res.send(result[0])
 
