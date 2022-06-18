@@ -14,7 +14,7 @@ async function main(){
 
   let port = process.env.PORT || 3590
   app.listen(port, ()=>{
-    console.log("server up")
+    console.log("NAPI_2 server up")
   })
 
   const mysql = require('mysql2/promise')
@@ -37,7 +37,7 @@ async function main(){
 
   // GET ALL INGREDIENTS
   app.get('/api/ingredients/', async (req, res)=>{
-
+console.log("test emmanuele")
     const result = await connection.execute('SELECT * FROM ingredients')
     console.log(result[0])
     res.send(result[0])
@@ -60,7 +60,7 @@ async function main(){
     }
     const result = await connection.execute('INSERT INTO ingredients (name, price, qty) VALUES (?, ?, ?)', [data.name, data.price, data.qty])
     console.log(data, result[0])
-    res.send(JSON.parse(JSON.stringify(data)))
+    res.send(data)
   })
 
   // PUT EXISTING INGREDIENT
