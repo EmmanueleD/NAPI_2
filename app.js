@@ -19,12 +19,18 @@ async function main(){
 
   const mysql = require('mysql2/promise')
 
+
+
+  //mysql://root:ScDxO0JIzTXkEaBHAzFA@containers-us-west-65.railway.app:5818/railway
   const connection =  await mysql.createPool({
       host: 'containers-us-west-65.railway.app',
       port:5818,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
+      user: 'root',
+      password: 'ScDxO0JIzTXkEaBHAzFA',
+      database:'railway',
+      // user: process.env.DB_USER,
+      // password: process.env.DB_PASS,
+      // database: process.env.DB_NAME,
     })
 
 
@@ -54,7 +60,7 @@ async function main(){
     }
     const result = await connection.execute('INSERT INTO ingredients (name, price, qty) VALUES (?, ?, ?)', [data.name, data.price, data.qty])
     console.log(data, result[0])
-    res.send(data)
+    res.send(JSON.parse(JSON.stringify(data)))
   })
 
   // PUT EXISTING INGREDIENT
