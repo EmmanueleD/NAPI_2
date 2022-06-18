@@ -77,9 +77,9 @@ async function main(){
 
   //GET BIGGER ID IN RECIPES TABLE
   app.get('/api/selectBiggerId/', async(req, res)=>{
-      const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC')
+      const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
       console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result", result[0])
-      res.send(result[0].id)
+      res.send(result[0])
   })
 
   // GET ALL RECIPES
