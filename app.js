@@ -70,9 +70,9 @@ async function main(){
 
   // DELETE EXISTING INGREDIENT
   app.delete('/api/ingredients/:id',cors(),  async (req, res)=>{
-//     const result = await connection.execute('DELETE FROM ingredients WHERE ingredients.id = ?', [req.params.id])
-//     console.log("🚀 ~ file: app.js ~ line 75 ~ app.delete ~ result", result[0])
-//     res.send(result[0])
+    const result = await connection.execute('DELETE FROM ingredients WHERE ingredients.id = ?', [req.params.id])
+    console.log("🚀 ~ file: app.js ~ line 75 ~ app.delete ~ result", result[0])
+    res.send(result[0])
   })
 
   app.get('/api/selectBiggerId/', async(req, res)=>{
