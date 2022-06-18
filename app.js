@@ -58,14 +58,14 @@ async function main(){
 
   // PUT EXISTING INGREDIENT
   app.put('/api/ingredients/:id', async(req, res)=>{
-//     let data = {
-//       name: req.body.name,
-//       price: req.body.price,
-//       qty: req.body.qty
-//     }
-//     const result = await connection.execute('UPDATE ingredients SET name = ?, price = ? , qty = ? WHERE ingredients.id = ? ', [data.name, data.price, data.qty, req.params.id])
-//     console.log("🚀 ~ file: app.js ~ line 67 ~ app.put ~ result", result[0])
-//     res.send(result[0])
+    let data = {
+      name: req.body.name,
+      price: req.body.price,
+      qty: req.body.qty
+    }
+    const result = await connection.execute('UPDATE ingredients SET name = ?, price = ? , qty = ? WHERE ingredients.id = ? ', [data.name, data.price, data.qty, req.params.id])
+    console.log("🚀 ~ file: app.js ~ line 67 ~ app.put ~ result", result[0])
+    res.send(result[0])
   })
 
   // DELETE EXISTING INGREDIENT
