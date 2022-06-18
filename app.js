@@ -46,14 +46,14 @@ async function main(){
 
   // POST NEW INGREDIENT
   app.post('/api/ingredients/', async(req, res)=>{
-//     let data = {
-//       name: req.body.name,
-//       price: req.body.price,
-//       qty: req.body.qty
-//     }
-//     const result = await connection.execute('INSERT INTO ingredients (name, price, qty) VALUES (?, ?, ?)', [data.name, data.price, data.qty])
-//     console.log("🚀 ~ file: app.js ~ line 55 ~ app.post ~ data", data)
-//     res.send(data)
+    let data = {
+      name: req.body.name,
+      price: req.body.price,
+      qty: req.body.qty
+    }
+    const result = await connection.execute('INSERT INTO ingredients (name, price, qty) VALUES (?, ?, ?)', [data.name, data.price, data.qty])
+    console.log("🚀 ~ file: app.js ~ line 55 ~ app.post ~ data", data)
+    res.send(data)
   })
 
   // PUT EXISTING INGREDIENT
