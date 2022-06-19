@@ -137,21 +137,24 @@ async function main(){
   // GET RECIPE BY ID
   app.get('/api/recipes_/:id', async (req, res)=>{
 
-//     const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
+    const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
 
-//     let response = {
-//       ID_recipe: result[0][0].ID_recipe,
-//       NAME_recipe: result[0][0].NAME_recipe,
-//       ingredients: []
-//     }
-//     result[0].forEach(element => {
-//       response.ingredients.push({
-//         ID_ingredient: element.ID_ingredient,
-//         NAME_ingredient: element.NAME_ingredient,
-//         QTY_ingredient: element.QTY_ingredient
-//       })
-//     })
-//     res.send(response)
+    let response = {
+      ID_recipe: result[0][0].ID_recipe,
+      NAME_recipe: result[0][0].NAME_recipe,
+      ingredients: []
+    }
+    result[0].forEach(element => {
+      response.ingredients.push({
+        ID_ingredient: element.ID_ingredient,
+        NAME_ingredient: element.NAME_ingredient,
+        QTY_ingredient: element.QTY_ingredient
+      })
+    })
+
+    console.log("🚀 ~ file: app.js ~ line 155 ~ app.get ~ response", response)
+
+    res.send(response)
   })
 
   //POST NEW RECIPE
