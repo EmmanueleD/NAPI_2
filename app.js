@@ -154,7 +154,7 @@ async function main(){
         QTY_ingredient: element.QTY_ingredient
       })
     })
-    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", response)
+    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", result)
 
     res.send(result)
   })
