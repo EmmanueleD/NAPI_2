@@ -193,37 +193,37 @@ async function main(){
   //EDIT EXISTING RECIPE  
   //               ~~~[ UPDATE RECIPE NAME ]~~~
   app.put('/api/recipes_editname/:id', async (req, res) => {
-//     const result = await connection.execute('UPDATE recipes SET recipes.name=? WHERE recipes.id=?', 
-//     [req.body.name, req.params.id])
-//     res.send({
-//       newName: req.body.name,
-//       result: result[0]
-//     })
-//   })
+    const result = await connection.execute('UPDATE recipes SET recipes.name=? WHERE recipes.id=?', 
+    [req.body.name, req.params.id])
+    res.send({
+      newName: req.body.name,
+      result: result[0]
+    })
+  })
 
-//   //               ~~~[ UPDATE INGREDIENT QUANTITY ]~~~
-//   app.put('/api/recipes_editingredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
-//     const result = await connection.execute('UPDATE recipes_ingredients  SET recipes_ingredients.qty=? WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', 
-//     [req.params.qty, req.params.id_recipe, req.params.id_ingredient])
-//     res.send({
-//       editedIngredient:{
-//         id: req.params.id_ingredient,
-//         qty: req.params.qty
-//       },
-//       result: result[0]
-//     })
-//   })
+  //               ~~~[ UPDATE INGREDIENT QUANTITY ]~~~
+  app.put('/api/recipes_editingredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
+    const result = await connection.execute('UPDATE recipes_ingredients  SET recipes_ingredients.qty=? WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', 
+    [req.params.qty, req.params.id_recipe, req.params.id_ingredient])
+    res.send({
+      editedIngredient:{
+        id: req.params.id_ingredient,
+        qty: req.params.qty
+      },
+      result: result[0]
+    })
+  })
 
-//   //               ~~~[ INSERT NEW INGREDIENT ]~~~
-//   app.post('/api/recipes_addingredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
-//     const result = await connection.execute('INSERT INTO recipes_ingredients (id_recipe, id_ingredient, qty) VALUES (?, ?, ?)', 
-//     [req.params.id_recipe, req.params.id_ingredient, req.params.qty])
-//     res.send({
-//       addedIngredient:{
-//         id: req.params.id_ingredient,
-//         result: result[0]
-//       }
-//     })
+  //               ~~~[ INSERT NEW INGREDIENT ]~~~
+  app.post('/api/recipes_addingredient/:id_recipe/:id_ingredient/:qty', async (req, res) => {
+    const result = await connection.execute('INSERT INTO recipes_ingredients (id_recipe, id_ingredient, qty) VALUES (?, ?, ?)', 
+    [req.params.id_recipe, req.params.id_ingredient, req.params.qty])
+    res.send({
+      addedIngredient:{
+        id: req.params.id_ingredient,
+        result: result[0]
+      }
+    })
   })
 
   //               ~~~[ DELETE INGREDIENT ]~~~
