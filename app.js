@@ -138,7 +138,7 @@ async function main(){
   app.get('/api/recipes_/:id', async (req, res)=>{
 
     const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
-    console.log("🚀 ~ file: app.js ~ line 141 ~ app.get ~ result[0]", result[0])
+    console.log("🚀 ~ file: app.js ~ line 141 ~ app.get ~ result", result)
 
 
     
