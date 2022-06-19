@@ -228,23 +228,23 @@ async function main(){
 
   //               ~~~[ DELETE INGREDIENT ]~~~
   app.delete('/api/recipes_deleteingredient/:id_recipe/:id_ingredient', cors(), async (req, res)=>{
-//     const result = await connection.execute('DELETE FROM recipes_ingredients  WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', [req.params.id_recipe, req.params.id_ingredient])
-//     res.send({
-//       deletedIngredient:{
-//         id: req.params.id_ingredient,
-//         result: result[0]
-//       }
-//     })
+    const result = await connection.execute('DELETE FROM recipes_ingredients  WHERE recipes_ingredients.id_recipe=? AND recipes_ingredients.id_ingredient=?', [req.params.id_recipe, req.params.id_ingredient])
+    res.send({
+      deletedIngredient:{
+        id: req.params.id_ingredient,
+        result: result[0]
+      }
+    })
   })
 
   // DELETE EXISTING RECIPE
   app.delete('/api/recipes_/:id', cors(), async (req, res)=> {
-//     const deleteRecipe = await connection.execute('DELETE FROM recipes WHERE id=?', [req.params.id])
-//     const deleteIngredients = await connection.execute('DELETE FROM recipes_ingredients WHERE id_recipe=?', [req.params.id])
-//     res.send({
-//       recipeDeleted: deleteRecipe[0].affectedRows == 1 ? true : false,
-//       ingredientsInRecipe: deleteIngredients[0].affectedRows > 0 ? deleteIngredients[0].affectedRows : false
-//     })
+    const deleteRecipe = await connection.execute('DELETE FROM recipes WHERE id=?', [req.params.id])
+    const deleteIngredients = await connection.execute('DELETE FROM recipes_ingredients WHERE id_recipe=?', [req.params.id])
+    res.send({
+      recipeDeleted: deleteRecipe[0].affectedRows == 1 ? true : false,
+      ingredientsInRecipe: deleteIngredients[0].affectedRows > 0 ? deleteIngredients[0].affectedRows : false
+    })
   })
 }
 main()
