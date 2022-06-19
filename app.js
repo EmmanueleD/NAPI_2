@@ -138,23 +138,23 @@ async function main(){
   app.get('/api/recipes_/:id', async (req, res)=>{
 
     const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
-    console.log("🚀 ~ file: app.js ~ line 141 ~ app.get ~ result", result)
 
 
     
-//     let response = {
-//       ID_recipe: result[0][0].ID_recipe,
-//       NAME_recipe: result[0][0].NAME_recipe,
-//       ingredients: []
-//     }
-//     result[0].forEach(element => {
-//       response.ingredients.push({
-//         ID_ingredient: element.ID_ingredient,
-//         NAME_ingredient: element.NAME_ingredient,
-//         QTY_ingredient: element.QTY_ingredient
-//       })
-//     })
+    let response = {
+      ID_recipe: result[0][0].ID_recipe,
+      NAME_recipe: result[0][0].NAME_recipe,
+      ingredients: []
+    }
 
+    result[0].forEach(element => {
+      response.ingredients.push({
+        ID_ingredient: element.ID_ingredient,
+        NAME_ingredient: element.NAME_ingredient,
+        QTY_ingredient: element.QTY_ingredient
+      })
+    })
+    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", response)
 
     res.send(result)
   })
