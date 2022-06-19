@@ -139,7 +139,7 @@ async function main(){
 
     const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
 
-      const populateResponse = async function(){
+  
             let response = {
       ID_recipe: result[0][0].ID_recipe,
       NAME_recipe: result[0][0].NAME_recipe,
@@ -154,15 +154,14 @@ async function main(){
       })
     })
 
-    return response
-      }
+
     
     
 
     
-    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", populateResponse)
+    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", response)
 
-    res.send(populateResponse)
+    res.send(response)
   })
 
   //POST NEW RECIPE
