@@ -156,7 +156,7 @@ async function main(){
 //     })
 
 
-    res.send(result[0])
+    res.send(result)
   })
 
   //POST NEW RECIPE
