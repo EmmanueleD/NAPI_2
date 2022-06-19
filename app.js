@@ -160,9 +160,9 @@ async function main(){
     
 
     
-    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", response)
+    console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", populateResponse)
 
-    res.send(response)
+    res.send(populateResponse)
   })
 
   //POST NEW RECIPE
