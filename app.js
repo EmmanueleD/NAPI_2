@@ -79,14 +79,15 @@ async function main(){
   app.get('/api/selectBiggerId/', async(req, res)=>{
       const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
       console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result", result[0][0])
+      console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result.id", result[0][0].id)
       res.send(result[0][0])
   })
 
   // GET ALL RECIPES
   app.get('/api/recipes_simple/', async (req, res)=>{
-//     const result = await connection.execute('SELECT * FROM recipes')
-//     console.log("🚀 ~ file: app.js ~ line 88 ~ app.get ~ result", result[0])
-//     res.send(result[0])
+    const result = await connection.execute('SELECT * FROM recipes')
+    console.log("🚀 ~ file: app.js ~ line 88 ~ app.get ~ result", result[0])
+    res.send(result[0])
   })
 
   // GET ALL RECIPES WITH INGREDIENTS
