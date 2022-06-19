@@ -75,13 +75,7 @@ async function main(){
     res.send(result[0])
   })
 
-  //GET BIGGER ID IN RECIPES TABLE
-  app.get('/api/selectBiggerId/', async(req, res)=>{
-      const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
-      console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result", result[0][0])
-      console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result.id", result[0][0].id)
-      res.send(result[0][0])
-  })
+
 
   // GET ALL RECIPES
   app.get('/api/recipes_simple/', async (req, res)=>{
@@ -136,16 +130,12 @@ async function main(){
 
   // GET RECIPE BY ID
   app.get('/api/recipes_/:id', async (req, res)=>{
-
     const result = await connection.execute('SELECT r.id AS ID_recipe, r.name AS NAME_recipe, i.id AS ID_ingredient, i.name AS NAME_ingredient, ri.qty AS QTY_ingredient FROM recipes AS r JOIN recipes_ingredients AS ri ON ri.id_recipe = r.id JOIN ingredients AS i ON i.id = ri.id_ingredient WHERE r.id = ?', [req.params.id])
-
-  
-            let response = {
+      let response = {
       ID_recipe: result[0][0].ID_recipe,
       NAME_recipe: result[0][0].NAME_recipe,
       ingredients: []
     }
-    
     result[0].forEach(element => {
       response.ingredients.push({
         ID_ingredient: element.ID_ingredient,
@@ -153,49 +143,51 @@ async function main(){
         QTY_ingredient: element.QTY_ingredient
       })
     })
-
-
-    
-    
-
-    
     console.log("🚀 ~ file: app.js ~ line 157 ~ app.get ~ response", response)
-
     res.send(response)
   })
 
+
+    //GET BIGGER ID IN RECIPES TABLE
+    app.get('/api/selectBiggerId/', async(req, res)=>{
+      const result = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
+      console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result", result[0][0])
+      console.log("🚀 ~ file: app.js ~ line 83 ~ app.get ~ result.id", result[0][0].id)
+      res.send(result[0][0])
+  })
+
+
   //POST NEW RECIPE
   app.post('/api/recipes_/', async (req, res)=>{
-//     let ingredientsQuery = "INSERT INTO recipes_ingredients (id_recipe, id_ingredient, qty) VALUES"
-//     let data = {
-//       name: req.body.name,
-//       ingredients: []
-//     }
-//     req.body.ingredients.forEach(element => {
-//       data.ingredients.push(element)
-//     })
-//     // create new recipe
-//     const newRecipe = await connection.execute('INSERT INTO recipes (name) VALUES (?)', [data.name])
-//     console.log("🚀 ~ file: app.js ~ line 161 ~ app.post ~ newRecipe", newRecipe)
+    let ingredientsQuery = "INSERT INTO recipes_ingredients (id_recipe, id_ingredient, qty) VALUES"
+    let data = {
+      name: req.body.name,
+      ingredients: []
+    }
+    req.body.ingredients.forEach(element => {
+      data.ingredients.push(element)
+    })
+    // create new recipe
+    const newRecipe = await connection.execute('INSERT INTO recipes (name) VALUES (?)', [data.name])
+    console.log("🚀 ~ file: app.js ~ line 161 ~ app.post ~ newRecipe", newRecipe)
 
 
-//     //get id of recipe just created
-// //     const lastId = await connection.execute('SELECT LAST_INSERT_ID()')
-//     const lastId = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
-//     console.log("🚀 ~ file: app.js ~ line 167 ~ app.post ~ lastId", lastId)
+    //get id of recipe just created
+//     const lastId = await connection.execute('SELECT LAST_INSERT_ID()')
+    const lastId = await connection.execute('SELECT id FROM recipes ORDER BY id DESC LIMIT 1')
+    console.log("🚀 ~ file: app.js ~ line 167 ~ app.post ~ lastId", lastId)
 
-//     data.id = await lastId[0][0]["LAST_INSERT_ID()"]
-//     //set query to put all ingredients in recipe just created
-//     data.ingredients.forEach(element => {
-//     console.log("🚀 ~ file: app.js ~ line 172 ~ app.post ~ element", element)
+    data.id = await lastId[0][0].id
+    //set query to put all ingredients in recipe just created
+    data.ingredients.forEach(element => {
       
-//       let nextIngredient = " (" + data.id +", "+element.id+", "+element.qty+" ),"
-//       ingredientsQuery += nextIngredient
-//     })
-//     const putIngredients = await connection.execute(ingredientsQuery.slice(0, -1)) 
-//     console.log("🚀 ~ file: app.js ~ line 178 ~ app.post ~ putIngredients", putIngredients)
+      let nextIngredient = " (" + data.id +", "+element.id+", "+element.qty+" ),"
+      ingredientsQuery += nextIngredient
+    })
+    const putIngredients = await connection.execute(ingredientsQuery.slice(0, -1)) 
+    console.log("🚀 ~ file: app.js ~ line 178 ~ app.post ~ putIngredients", putIngredients)
 
-//     res.send(data)
+    res.send(data)
   })
 
   //EDIT EXISTING RECIPE  
