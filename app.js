@@ -72,6 +72,7 @@ async function main(){
   app.delete('/api/ingredients/:id',cors(),  async (req, res)=>{
     const result = await connection.execute('DELETE FROM ingredients WHERE ingredients.id = ?', [req.params.id])
     console.log("🚀 ~ file: app.js ~ line 75 ~ app.delete ~ result", result[0])
+    console.log("🚀 ~ file: app.js ~ line 75 ~ app.delete ~ result", result[0])
     res.send(result[0])
   })
 
