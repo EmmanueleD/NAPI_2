@@ -52,7 +52,7 @@ async function main(){
       qty: req.body.qty
     }
     const result = await connection.execute('INSERT INTO ingredients (name, price, qty) VALUES (?, ?, ?)', [data.name, data.price, data.qty])
-    console.log("🚀 ~ file: app.js ~ line 55 ~ app.post ~ data", data)
+    console.log("🚀 ~ file: app.js ~ line 55 ~ app.post ~ data", result.data)
     res.send(data)
   })
 
