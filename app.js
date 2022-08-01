@@ -21,7 +21,7 @@ async function main(){
 
   const mysql = require('mysql2/promise')
 
-  const connection =  await mysql.createPool({
+  const connection =   mysql.createPool({
       host: process.env.DATABASE_URL,
       port:5818,
       user: process.env.DB_USER,
