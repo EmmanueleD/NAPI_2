@@ -4,9 +4,11 @@ async function main(){
   const app = express()
   
   app.use(express.json())
-  app.use(cors())
+  app.use(cors({
+      origin: '*'
+  }))
 
-  app.options('*', cors())
+//   app.options('*', cors())
 
   app.get('/', (req, res)=>{
     res.send("Lobby path")
