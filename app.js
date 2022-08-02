@@ -16,7 +16,7 @@ async function main(){
 
   let port = process.env.PORT || 3590
   app.listen(port, ()=>{
-    console.log("NAPI_2 Server up   :)")
+    console.log("NAPI_2 Server is up   :)")
   })
 
   const mysql = require('mysql2/promise')
