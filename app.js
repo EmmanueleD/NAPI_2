@@ -94,7 +94,7 @@ async function main(){
 
 
       ////////////////////////////////////////////
-      const result = await connection.execute('SELECT recipes.id AS recipe_id, recipes.name AS recipe_name, ingredients.id AS ingredient_id, ingredients.name AS ingredient_name, ingredients.price AS ingredient_price, ingredients.qty AS ingredient_qty, recipes_ingredients.qty AS ingrInRecipe_qty, ingredients.price / ingredients.qty * recipes_ingredients.qty AS ingrInRecipe_price FROM recipes JOIN recipes_ingredients ON recipes_ingredients.id_recipe = recipes.id JOIN ingredients ON ingredients.id = recipes_ingredients.id_ingredient;')
+      const result = await connection.execute('SELECT recipes.id AS recipe_id, recipes.name AS recipe_name, recipes.n_servings AS recipe_n_servings, ingredients.id AS ingredient_id, ingredients.name AS ingredient_name, ingredients.price AS ingredient_price, ingredients.qty AS ingredient_qty, recipes_ingredients.qty AS ingrInRecipe_qty, ingredients.price / ingredients.qty * recipes_ingredients.qty AS ingrInRecipe_price FROM recipes JOIN recipes_ingredients ON recipes_ingredients.id_recipe = recipes.id JOIN ingredients ON ingredients.id = recipes_ingredients.id_ingredient;')
       console.log("🚀 ~ file: app.js ~ line 100 ~ app.get ~ result", result[0])
 
       res.send(result[0])
